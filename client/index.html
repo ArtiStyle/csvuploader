@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <body>
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        onDataRecieved = (data) => {
+          this.setState({ data: data.users });
+        };
+        constructor() {
+          super();
+          this.state = { data: [] };
+        }
+        render() {
+          return (
+            <div>
+              <Form onData={this.onDataRecieved} />
+              <Table data={this.state.data} />
+            </div>
+          );
+        }
+      }
+
+      class Table extends React.Component {
+        render() {
+          const { data } = this.props;
+          console.log('table,', data);
+          if (!data || !data.length) return <div />;
+          return (
+            <div>
+              <table>
+                <tr>
+                  {Object.keys(data[0]).map((key, i) => {
+                    return <th key={i}>{key}</th>;
+                  })}
+                </tr>
+
+                {data.map((item, i) => {
+                  return (
+                    <tr key={i}>
+                      {Object.keys(data[i]).map((key, i) => {
+                        return <td key={i}>{item[key]}</td>;
+                      })}
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
+          );
+        }
+      }
+
+      class Form extends React.Component {
+        handleFile = async (e) => {
+          console.log(e);
+          const formData = new FormData();
+          const csv = e.target;
+          formData.append('csv', csv.files[0]);
+          const res = await axios.post('/users/csv', formData);
+          this.props.onData(res.data);
+        };
+
+        render() {
+          return (
+            <div>
+              <form>
+                <input onChange={this.handleFile} type="file" />
+              </form>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('mydiv'));
+    </script>
+  </body>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</html>
