@@ -6,7 +6,7 @@ CSVUploader is a express api server .
 
 CSVUploader uses a number of open source projects to work properly:
 
-- [csv-parser] - HTML enhanced for web apps!
+- [csv-parser] - Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum CSV acid test suite.
 - [dotenv] - load env variables from .env file
 - [express] - Markdown parser done right. Fast and easy to extend.
 - [mongoose] - MongoDB object modeling tool designed to work in an asynchronous environment
