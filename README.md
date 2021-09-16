@@ -14,12 +14,9 @@ CSVUploader uses a number of open source projects to work properly:
 - [Express] - fast node.js network app framework
 - [multer] - Middleware for handling `multipart/form-data`.
 
-And of course Dillinger itself is open source with a [public repository][dill]
-on GitHub.
-
 ## Installation and Run
 
-CSVUploader requires [Node.js](https://nodejs.org/) v10+ to run.
+CSVUploader requires [Node.js](https://nodejs.org/) v12+ to run.
 CSVUploader requires MongoDB to run.
 
 Install the dependencies and devDependencies.
