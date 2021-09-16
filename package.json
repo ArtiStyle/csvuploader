@@ -11,6 +11,11 @@
   },
   "keywords": [],
   "author": "",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": ["/node_modules/", "build"]
+  },
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.13",
